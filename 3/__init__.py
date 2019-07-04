@@ -4,10 +4,12 @@ class Fabric():
     seed = ['.']
     rows = []
     overlap = 0
+    no_collisions = []
 
     def __init__(self):
         self.seed = ['.'] * 1000
-        self.rows = [self.seed] * 1000
+        for i in range(1000):
+            self.rows.append(self.seed[:])
 
     def get_location(self, line):
         claim, junk, coords, dimensions = line.split(' ')
@@ -18,16 +20,26 @@ class Fabric():
         return claim, x, y, run, drop
 
     def populate(self, claim, x, y, run, drop):
-        for r in range(y,y+drop):
-            row = self.rows[r]
-            for i, c in enumerate(self.rows[r]):
-                if c != '.':
-                    row[i] = claim
-                elif c != 'X':
-                    row[i] = 'X'
+        hits = 0
+        for r in range(y, y+drop):
+            temprow = self.rows[r]
+            for i in range(x, x+run):
+                if temprow[i] == '.':
+                    temprow[i] = claim
+                elif temprow[i] != 'X':
+                    self.no_collisions.remove(temprow[i]) if temprow[i] in self.no_collisions else False
+                    temprow[i] = 'X'
                     self.overlap += 1
-                    # print(self.overlap)
-            self.rows[r] = row
+                    hits = 1
+                else:
+                    hits = 1
+        if hits == 0:
+            self.no_collisions.append(claim)
+
+    def output(self):
+        print("Starting\n---------")
+        for r in self.rows:
+            print(r)
 
 if __name__ == "__main__":
     fab = Fabric()
@@ -42,6 +54,8 @@ if __name__ == "__main__":
         # if l % 50 == 0:
             # print(l)
         claim, x, y, run, drop = fab.get_location(line)
-        fab.populate(int(claim), int(x), int(y), int(run),int(drop))
+        fab.populate(str(claim), int(x), int(y), int(run),int(drop))
+        # fab.output()
 
     print("{} squares overlap".format(fab.overlap))
+    print("Claim {} has no overlap".format(fab.no_collisions[0]))
