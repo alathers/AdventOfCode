@@ -58,5 +58,6 @@ for line in infile:
             valid += 1
             fields = []
             continue
+
         # print("{} and {}".format(req_fields, fields))
 print(valid)
