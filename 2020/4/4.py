@@ -16,7 +16,7 @@ def validate_data(k,v):
             return True
         return False
     if k == 'ecl':
-        if v in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+        if v in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']:
             return True
         return False
     if k == 'pid':
