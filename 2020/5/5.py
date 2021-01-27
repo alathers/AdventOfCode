@@ -22,7 +22,7 @@ max_seat = 0
 for line in infile:
     rowstring = ''
     colstring = ''
-    for c in line[::-1]:
+    for c in line[::]:
         if c == 'F':
             rowstring += '0'
         elif c == 'B':
@@ -33,9 +33,12 @@ for line in infile:
             colstring += '1'
         else:
             print(c)
+    # print(int(rowstring,2))
+    # print(int(rowstring, 2) * 8 + int(colstring, 2))
+    # print(line, rowstring, colstring)
     max_seat = max(max_seat, (int(rowstring, 2) * 8 + int(colstring, 2)))
     
 
 print(max_seat)
-print(row)
+# print(row)
 
