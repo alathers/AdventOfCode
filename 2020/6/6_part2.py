@@ -17,11 +17,11 @@ for n,g in enumerate(infile):
             else:
                 result = set([c for c in s]).intersection(result)
         # print(result,len(result), ys)
-        yeses += len(result)
+        yeses += len(result)        
         last = result
-        print(yeses, last)
+        print(len(result), yeses, result)
         result = ''
         group = []
 
-yeses += len(last)
+# yeses += len(last)
 print(yeses)
