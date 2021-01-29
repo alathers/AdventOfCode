@@ -2060,5 +2060,3 @@ zasctgqmdpnfhieokl
 gcaeiltmnpzshfkd
 ghltscmpfadkienz
 nsdemfhgpzklctia
-
-3293 {'f', 'm', 't', 'a', 'g', 'l', 'h', 'd', 'c', 'k', 'e', 'i', 'n', 'p', 'z', 's'}
