@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import re
+from bag import bag
 
 
 def getOuterBag(s):
@@ -7,12 +8,15 @@ def getOuterBag(s):
     return outstring
 
 def getInnerBags(s):
+    """extract a dict of inner bags"""
+    
     outstring, contents = re.split('contain', s)
     contents.strip('\.')
+    # first special case
     if contents == 'no other bags':
         return {}
     if re.match(','):
-        bags = contents.split(,)
+        bags = contents.split(',')
     else:
         bags = ['contents']
     for bag in bags:
@@ -23,9 +27,8 @@ with open('input.txt') as f:
     infile = f.read().splitlines()
 
 
-
-
-my_bag = 'shiny gold'
+my_bag = bag.Bag('shiny gold')
+# print(my_bag.description)
 outbags = {}
 
 
