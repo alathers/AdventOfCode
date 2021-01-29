@@ -1,38 +1,19 @@
 #!/usr/bin/env python3
-import re
-from bag import bag
-
-
-def getOuterBag(s):
-    outstring, contents = re.split('contain', s)
-    return outstring
-
-def getInnerBags(s):
-    """extract a dict of inner bags"""
-    
-    outstring, contents = re.split('contain', s)
-    contents.strip('\.')
-    # first special case
-    if contents == 'no other bags':
-        return {}
-    if re.match(','):
-        bags = contents.split(',')
-    else:
-        bags = ['contents']
-    for bag in bags:
-        number,description
-        
-
+from bag import bag 
+             
+my_bag = bag.Bag('shiny gold')
 with open('input.txt') as f:
     infile = f.read().splitlines()
 
-
-my_bag = bag.Bag('shiny gold')
-# print(my_bag.description)
 outbags = {}
-
-
-
+can_contain = 0
 for line in infile:
-    outstring = getOuterBag(line)
-    # print(outstring)    
+    line = line.rstrip('.')
+    outstring = my_bag.getOuterBag(line)
+    inner_bags = my_bag.getInnerBags(line)
+    outbags[outstring] = inner_bags
+    if my_bag.description in inner_bags.keys():
+        can_contain += 1
+    # print(inner_bags)
+
+print(len(can_contain))
