@@ -2,18 +2,22 @@
 from bag import bag 
              
 my_bag = bag.Bag('shiny gold')
-with open('input.txt') as f:
+# with open('input.txt') as f:
+with open('sample_input.txt') as f:
     infile = f.read().splitlines()
 
 outbags = {}
-can_contain = []
 for line in infile:
     line = line.rstrip('.')
     outstring = my_bag.getOuterBag(line)
-    inner_bags = my_bag.getInnerBags(line)
-    outbags[outstring] = inner_bags
-    if my_bag.description in inner_bags.keys():
-        can_contain.append()
-    # print(inner_bags)
+    outbags[outstring] = bag.Bag(outstring)
+    outbags[outstring].setInnerBags(line)
 
-print(len(can_contain))
+
+for bag in outbags:
+    outbags[bag].populateContains(outbags)
+
+my_bag.canContain(my_bag.description, outbags)
+print(len(outbags.keys()))
+print(len(my_bag.contained_by))
+# print(outbags)
