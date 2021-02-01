@@ -2,9 +2,13 @@ import re
 
 class Bag:
     def __init__(self,desc=None):
+        # String for the name of the bag
         self.description = desc
+        # A dict of bag names and counts for what this can contain
         self.contains = {}
+        # A set of strings for the bags that can contain this bag.
         self.contained_by = set()
+        self.nested_bags = 0
 
 
     def getOuterBag(self, s):
@@ -29,7 +33,8 @@ class Bag:
                 description = description.replace(' bags','')
                 description = description.replace(' bag', '')
                 # print(number)
-                bag_counts[description] = number
+                bag_counts[description] = int(number)
+        # print(self.description, bag_counts)
         self.contains = bag_counts
 
 
@@ -42,7 +47,8 @@ class Bag:
                 # print(b, k)
                 # return
                 inner.update(bags[k].contains)
-                for v in inner.keys():
+                # for v in inner.keys():
+                #     inner[k] = bags[b].contains[k] * inner[k]
             bags[b].contains.update(inner)
 
 
@@ -60,3 +66,16 @@ class Bag:
             count += self.contains[b]
         return count
 
+
+    def containCount(self, bags):
+        """
+        Contains:
+        name = val
+        name = val
+        """
+        print(self.description, self.contains)
+        for b in self.contains.keys():
+            print('  ', )
+            bags[b].containCount(bags)
+            counter = (self.contains[b] * bags[b].nested_bags) + 1
+            self.nested_bags += counter

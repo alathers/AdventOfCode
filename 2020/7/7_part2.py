@@ -17,10 +17,16 @@ for line in infile:
 for bag in outbags:
     outbags[bag].populateContains(outbags)
 
-my_bag.canContain(my_bag.description, outbags)
-print(len(outbags.keys()))
-print(len(my_bag.contained_by))
-# print(outbags)
+# my_bag.canContain(my_bag.description, outbags)
 
-for b in outbags:
-    print(b, outbags[b].contains)
+outbags[my_bag.description].canContain(my_bag.description, outbags)
+
+# my_bag.containCount(outbags)
+outbags[my_bag.description].containCount(outbags)
+
+print(len(outbags.keys()))
+print(len(outbags[my_bag.description].contained_by))
+print(outbags[my_bag.description].nested_bags)
+
+# for b in outbags:
+#     print(b, outbags[b].contains)
